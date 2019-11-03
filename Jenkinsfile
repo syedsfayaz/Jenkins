@@ -2,24 +2,55 @@ pipeline {
   agent any
   stages {
     stage('Checkout') {
-      steps {
-        echo 'Connecting to git'
-        echo 'Pulling Code'
-        echo 'Doing some thing'
+      parallel {
+        stage('pull it') {
+          steps {
+            echo 'Connecting to git'
+            echo 'Doing some thing'
+          }
+        }
+        stage('Pull code') {
+          steps {
+            echo 'Pull code'
+          }
+        }
+        stage('Store Locally') {
+          steps {
+            echo 'Store locally'
+          }
+        }
       }
     }
     stage('Build') {
-      steps {
-        echo 'Compiling'
-        echo 'Junits'
-        echo 'Sonar'
+      parallel {
+        stage('Build') {
+          steps {
+            echo 'Compiling'
+            echo 'Junits'
+            echo 'Sonar'
+          }
+        }
+        stage('Compile') {
+          steps {
+            echo 'Compiling'
+          }
+        }
       }
     }
     stage('Deploy') {
-      steps {
-        echo 'Install Tc'
-        echo 'War file'
-        echo 'deploy'
+      parallel {
+        stage('Deploy') {
+          steps {
+            echo 'Install Tc'
+            echo 'War file'
+            echo 'deploy'
+          }
+        }
+        stage('Deployed to TC') {
+          steps {
+            echo 'Deployed to TC'
+          }
+        }
       }
     }
   }
