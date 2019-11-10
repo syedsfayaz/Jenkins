@@ -29,15 +29,15 @@ pipeline {
                            }
                            }
                             stage('Integration test') {
-                                     when {
-                                              {
-                                               agent "docker"        
-                                              }
+                              agent {
+                                    master {
+                                            reuseNode true
+                                           // image 'ubuntu'
+                                           }
                                     }
                               steps {
                                 echo "Running the integration test..."
                               }
-                            }
                            }
                            }
                            }
