@@ -1,57 +1,45 @@
 pipeline {
-  agent any
-  stages {
-    stage('Checkout') {
-      parallel {
-        stage('pull it') {
-          steps {
-            echo 'Connecting to git'
-            echo 'Doing some thing'
-          }
-        }
-        stage('Pull code') {
-          steps {
-            echo 'Pull code'
-          }
-        }
-        stage('Store Locally') {
-          steps {
-            echo 'Store locally'
-          }
-        }
-      }
-    }
-    stage('Build') {
-      parallel {
-        stage('Build') {
-          steps {
-            echo 'Compiling'
-            echo 'Junits'
-            echo 'Sonar'
-          }
-        }
-        stage('Compile') {
-          steps {
-            echo 'Compiling'
-          }
-        }
-      }
-    }
-    stage('Deploy') {
-      parallel {
-        stage('Deploy') {
-          steps {
-            echo 'Install Tc'
-            echo 'War file'
-            echo 'deploy'
-          }
-        }
-        stage('Deployed to TC') {
-          steps {
-            echo 'Deployed to TC'
-          }
-        }
-      }
-    }
-  }
+         agent any
+         stages {
+                 stage('One') {
+                 steps {
+                     echo 'Hi, this is Fayaz'
+                 }
+                 }
+                 stage('Two') {
+                 steps {
+                    input('Do you want to proceed?')
+                 }
+                 }
+                 stage('Three') {
+                 when {
+                       not {
+                            branch "master"
+                       }
+                 }
+                 steps {
+                       echo "Hello"
+                 }
+                 }
+                 stage('Four') {
+                 parallel { 
+                            stage('Unit Test') {
+                           steps {
+                                echo "Running the unit test..."
+                           }
+                           }
+                            stage('Integration test') {
+                              agent {
+                                    docker {
+                                            reuseNode true
+                                            image 'ubuntu'
+                                           }
+                                    }
+                              steps {
+                                echo "Running the integration test..."
+                              }
+                           }
+                           }
+                           }
+              }
 }
