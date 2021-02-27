@@ -5,8 +5,9 @@ pipeline {
 	  ZYX = "DIUDH"
   }
   stages {
-	  options { timestamps() }
+	  
     stage('Checkout') {
+      options { timestamps() }
       parallel {
         stage('pull it') {
           steps {
