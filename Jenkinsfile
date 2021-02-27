@@ -28,6 +28,7 @@ pipeline {
       }
     }
     stage('Build') {
+      options { timestamps() }
       parallel {
         stage('Build') {
           steps {
@@ -44,6 +45,7 @@ pipeline {
       }
     }
     stage('Deploy') {
+      options { timestamps() }
       parallel {
         stage('Deploy') {
           steps {
