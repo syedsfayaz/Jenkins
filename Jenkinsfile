@@ -2,7 +2,7 @@ pipeline {
   agent any
   stages {
     stage('Checkout') {
-      parallel {
+   //   parallel {
         stage('pull it') {
           steps {
             echo 'Connecting to git'
@@ -19,7 +19,7 @@ pipeline {
             echo 'Store locally'
           }
         }
-      }
+   //   }
     }
     stage('Build') {
       parallel {
