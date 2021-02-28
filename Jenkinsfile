@@ -11,8 +11,9 @@ pipeline {
       parallel {
         stage('pull it') {
           steps {
-            echo 'env.XYZ Connecting to git'
+            echo ' Connecting to git'
             echo 'env.ZYX Doing some thing'
+	    echo env.XYZ env.ZYX
           }
         }
         stage('Pull code') {
