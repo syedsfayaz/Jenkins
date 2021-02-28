@@ -12,8 +12,7 @@ pipeline {
         stage('pull it') {
           steps {
             echo ' Connecting to git'
-            echo 'env.ZYX Doing some thing'
-	    echo env.XYZ env.ZYX
+            echo '$ZYX Doing some thing'
           }
         }
         stage('Pull code') {
